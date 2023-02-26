@@ -1,0 +1,46 @@
+ssh -i "secondary-key-pair.pem" ec2-user@ec2-34-209-93-144.us-west-2.compute.amazonaws.com
+Last login: Sun Feb 26 16:24:14 2023 from 1.53.144.174
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[ec2-user@ip-10-2-10-170 ~]$ mysql -h secondary-read-db.crkki7vxae20.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.28 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+5 rows in set (0.00 sec)
+
+MySQL [(none)]> use udacity;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [udacity]> INSERT INTO STUDENTS (ID, NAME, AGE, ADDRESS)   VALUES (2, "ABHIRAM", 22, "ALLAHABAD");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [udacity]> SELECT * FROM STUDENTS;
++----+---------+-----+-----------+
+| ID | NAME    | AGE | ADDRESS   |
++----+---------+-----+-----------+
+|  1 | ABHIRAM |  22 | ALLAHABAD |
+|  2 | ABHIRAM |  22 | ALLAHABAD |
++----+---------+-----+-----------+
+2 rows in set (0.00 sec)

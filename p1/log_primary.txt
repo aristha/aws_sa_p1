@@ -1,0 +1,52 @@
+ssh -i "keypair-udacity-p1.pem" ec2-user@ec2-54-82-92-180.compute-1.amazonaws.com
+Last login: Sun Feb 26 15:12:32 2023 from ec2-18-206-107-27.compute-1.amazonaws.com
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[ec2-user@ip-10-1-10-189 ~]$ mysql -h database-1.cqovffawnpoz.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.28 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+5 rows in set (0.00 sec)
+
+MySQL [(none)]> use udacity;
+Database changed
+MySQL [udacity]> CREATE TABLE STUDENTS (  
+    -> ID INT                           NOT NULL,  
+    -> NAME VARCHAR (20) NOT NULL,
+    -> AGE INT                         NOT NULL,
+    -> ADDRESS CHAR (25),
+    -> PRIMARY KEY (ID)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+MySQL [udacity]> INSERT INTO STUDENTS (ID, NAME, AGE, ADDRESS)   VALUES (1, "ABHIRAM", 22, "ALLAHABAD");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [udacity]> select * from students;
+ERROR 1146 (42S02): Table 'udacity.students' doesn't exist
+MySQL [udacity]> select * from STUDENTS;
++----+---------+-----+-----------+
+| ID | NAME    | AGE | ADDRESS   |
++----+---------+-----+-----------+
+|  1 | ABHIRAM |  22 | ALLAHABAD |
++----+---------+-----+-----------+
+1 row in set (0.00 sec)
